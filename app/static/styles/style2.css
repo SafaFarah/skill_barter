@@ -1,0 +1,119 @@
+/* General styles */
+body {
+    background-color: #4ee2ec;
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #185757;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+}
+
+nav {
+    flex: 1; 
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+nav ul li {
+    margin-left: 20px; 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Logo styles */
+.logo {
+    width: 40px; /* Adjust size as needed */
+    margin-left: 20px;
+}
+
+/* Styles for Exchange section */
+.exchanges {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.barter {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.barter h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.barter p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.barter img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.barter .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #185757;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.barter .btn:hover {
+    background-color: #031669;
+}
+
+/* Footer styles */
+footer {
+    color: #050505;
+    text-align: center;
+    padding: 10px;
+}
+Explanation:
+HTML: Provides the basic structure of the page including header (with navigation), main section (containing barters), and footer.
+CSS: Defines styles for different parts of the page such as header, logo, barters, buttons, and footer. It includes basic styling like background colors, fonts, margins, paddings, and button styles.
+You can customize this code based on the specific requirements and design preferences of your SkillBarter application. This example gives you a solid starting point for creating a Barter page that is simple yet effective for showcasing available barters and facilitating user interaction.
+
+
+
+
+
+
+
+
+
+footer {
+    color: #050505;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

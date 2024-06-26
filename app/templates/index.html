@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBarter - Welcome</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <header>
+        <img src="/static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="Barter.html">Barter</a></li>
+                <li><a href="requests.html">Requests</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="slider">
+            <div class="slides">
+                <img src="/static/images/welcome.jpg" alt="welcome">
+                <img src="/static/images/skill_exchange.jpg" alt="Skill Exchange">
+                <img src="/static/images/learning.jpg" alt="Learning">
+                <img src="/static/images/community.jpg" alt="Community">
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </section>
+        <section class="signup">
+            <a href="signup.html" class="btn">Sign Up</a>
+            <a href="signin.html" class="btn">Sign In</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
+    </footer>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
