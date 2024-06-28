@@ -1,0 +1,102 @@
+/* General styles */
+body {
+    background-color: #4ee2ec;
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #185757;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+}
+
+nav {
+    flex: 1; 
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+nav ul li {
+    margin-left: 20px; 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Logo styles */
+.logo {
+    width: 40px; /* Adjust size as needed */
+    margin-left: 20px;
+}
+
+/* Request page styles */
+.requests {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.requests h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.request-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.request-item {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.request-item h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.request-item p {
+    margin-bottom: 10px;
+}
+
+.request-item .btn {
+    background-color: #185757;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.request-item .btn:hover {
+    background-color: #031669;
+}
+footer {
+    color: #050505;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

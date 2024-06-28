@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBarter - Barter</title>
+    <link rel="stylesheet" href="../static/styles/style2.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <nav>
+            <ul>
+                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
+                    <li><a href="{{ url_for('barter') }}">Barter</a></li>
+                    <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="exchanges">
+            <h1>Available Barters</h1>
+            <div class="barter">
+                <h2>Web Development</h2>
+                <p>Offering expertise in HTML and CSS. Seeking graphic design skills.</p>
+                <img src="images/web-development.jpg" alt="Web Development">
+                <button class="btn">Request Barter</button>
+            </div>
+            <div class="barter">
+                <h2>Graphic Design</h2>
+                <p>Providing graphic design services. Interested in learning video editing.</p>
+                <img src="images/graphic-design.jpg" alt="Graphic Design">
+                <button class="btn">Request Barter</button>
+            </div>
+            <!-- Add more barters here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

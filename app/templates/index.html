@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBarter - Welcome</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <header>
+        <img src="/static/images/logo.png" alt="SkillBarter Logo" class="logo">
+    </header>
+    <main>
+        <section class="slider">
+            <div class="slides">
+                <img src="/static/images/welcome1.png" alt="welcome">
+                <img src="/static/images/welcome2.png" alt="Skill Exchange">
+                <img src="/static/images/welcome3.png" alt="Learning">
+                <img src="/static/images/welcome3.png" alt="Community">
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </section>
+        <section class="signup">
+            <a href="{{ url_for('signup') }}" class="btn">Start</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
+    </footer>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
