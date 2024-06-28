@@ -1,13 +1,13 @@
 /* General styles */
 body {
-    background-color: #4ee2ec;
+    background-color: white;
     font-family: Georgia, serif;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #185757;
+    background-color: white;
     padding: 10px;
     display: flex;
     align-items: center;
@@ -15,32 +15,10 @@ header {
     height: 30px;
 }
 
-nav {
-    flex: 1; 
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end; 
-}
-
-nav ul li {
-    margin-left: 20px; 
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
 /* Logo styles */
 .logo {
-    width: 40px; /* Adjust size as needed */
-    margin-left: 20px;
+    width: 200px; /* Adjust size as needed */
+    margin-top: 30px;
 }
 
 /* Styles for Slider */
@@ -51,7 +29,7 @@ nav ul li a {
     margin: 0 auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    width: 50%;
+    width: 60%;
 }
 
 .slides {
@@ -68,7 +46,7 @@ nav ul li a {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #031669;
+    background-color: #ffde59;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -78,38 +56,41 @@ nav ul li a {
 }
 
 .prev {
-    left: 10px;
+    left: 0 px;
 }
 
 .next {
     right: 10px;
 }
 
-.signup {
-    margin-top: 20px;
-    text-align: center; /* Center align the content */
+/* Styles for Start Now button */
+.btn {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    background-color: #2206c0;
+    color: #fff;
+    border: none;
+    padding: 20px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 5px;
 }
 
-.btn {
-    display: inline-block;;
-    padding: 20px 30px;
-    background-color: #031669;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px;
-    margin-right: 20px; /* Add space between buttons */
-}
 
 .btn:hover {
     background-color: #555;
     transform: scale(1.1);
 }
+
 footer {
-    color: #050505;
     position: absolute;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px; 
+    font-weight: bold;
+    color: #070707; 
     bottom: 0;
-    right: 0;
+    left: 0;
 }

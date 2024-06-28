@@ -98,18 +98,6 @@ footer {
     text-align: center;
     padding: 10px;
 }
-Explanation:
-HTML: Provides the basic structure of the page including header (with navigation), main section (containing barters), and footer.
-CSS: Defines styles for different parts of the page such as header, logo, barters, buttons, and footer. It includes basic styling like background colors, fonts, margins, paddings, and button styles.
-You can customize this code based on the specific requirements and design preferences of your SkillBarter application. This example gives you a solid starting point for creating a Barter page that is simple yet effective for showcasing available barters and facilitating user interaction.
-
-
-
-
-
-
-
-
 
 footer {
     color: #050505;

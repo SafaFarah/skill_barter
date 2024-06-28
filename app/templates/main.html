@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBarter - main</title>
+    <link rel="stylesheet" href="../static/styles/style5.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('log out') }}">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="list">
+            <img src="../static/images/main.png" alt="Welcome to SkillBarter">
+            <div class="action-buttons">
+                <a  href="{{ url_for('profile', user_id=user_id) }}" class="btn">Profile</a>
+                <a href="{{ url_for('barter') }}" class="btn">Barter</a>
+                <a href="{{ url_for('requests') }}" class="btn">Requests</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
+    </footer>
+</body>
+</html>
