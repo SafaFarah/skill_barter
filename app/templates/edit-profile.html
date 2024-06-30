@@ -4,47 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="../static/styles/style1.css">
+    <link rel="stylesheet" href="../static/styles/style6.css">
 </head>
 <body>
     <header>
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
         <nav>
             <ul>
-                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
-                    <li><a href="{{ url_for('barter') }}">Barter</a></li>
-                    <li><a href="{{ url_for('requests') }}">Requests</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('barter') }}">Barters</a></li>
+                <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
+                <li><a href="{{ url_for('log out') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="edit-profile-form">
-            <h1>Edit Profile</h1>
-            <form action="#" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
+            <div class="container">
+                <h1>Edit Your Profile</h1>
+                <form action="{{ url_for('update_profile') }}" method="post">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
+                    <p>{{ user.username }}</p> <!-- Display username (non-editable) -->
+
+                    <label for="bio">Bio:</label>
+                    <textarea id="bio" name="bio" rows="4" required>{{ user.bio }}</textarea>
+
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="profile-picture">Profile Picture:</label>
-                    <input type="file" id="profile-picture" name="profile-picture">
-                </div>
-                <div class="form-group">
-                    <label for="skills">Skills:</label>
-                    <textarea id="skills" name="skills" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn">Save Changes</button>
-            </form>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male" {% if user.gender == 'male' %} selected {% endif %}>Male</option>
+                        <option value="female" {% if user.gender == 'female' %} selected {% endif %}>Female</option>
+                    </select>
+
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" value="{{ user.age }}" required>
+                    
+                    <label for="skills_i_have">Skills I Have:</label>
+                    <select id="skills_i_have" name="skills_i_have">
+                        <option disabled selected>-- Select a skill --</option>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <!-- Add more skills here -->
+                    </select>
+                    <button type="button" onclick="addSkillToList('skills_i_have')">Add Skill</button>
+                    <label id="skills_i_have_label"></label><br>
+
+                    <label for="skills_i_want">Skills I Want:</label>
+                    <select id="skills_i_want" name="skills_i_want">
+                        <option disabled selected>-- Select a skill --</option>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <!-- Add more skills here -->
+                    </select>
+                    <button type="button" onclick="addSkillToList('skills_i_want')">Add Skill</button>
+                    <label id="skills_i_want_label"></label><br>
+
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+            </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
-    </footer>
+    <script src="../static/js/script1.js"></script>
 </body>
 </html>
-

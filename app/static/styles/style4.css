@@ -1,18 +1,18 @@
-/* General styles */
+/* requests styles */
 body {
-    background-color: #4ee2ec;
+    background-color: white;
     font-family: Georgia, serif;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #185757;
+    background-color: white;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 30px;
+    height: 50px;
 }
 
 nav {
@@ -28,75 +28,66 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 20px; 
+    margin-right: 20px; 
 }
 
 nav ul li a {
-    color: white;
+    color: #2206c0;
     text-decoration: none;
     font-weight: bold;
+    font-size: 16px;
 }
 
 /* Logo styles */
 .logo {
-    width: 40px; /* Adjust size as needed */
-    margin-left: 20px;
+    width: 200px;
+    margin-top: 10px;
 }
 
-/* Request page styles */
-.requests {
-    max-width: 800px;
-    margin: 0 auto;
+/* Main content styles */
+main {
     padding: 20px;
-    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.barter-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+section {
+    flex: 1;
+    margin-bottom: 50px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+
+.barter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.barter-item {
+    background-color: #ffffff;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.requests h1 {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
+.barter-item h3 {
+    margin-top: 0;
 }
 
-.request-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-}
-
-.request-item {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.request-item h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.request-item p {
-    margin-bottom: 10px;
-}
-
-.request-item .btn {
-    background-color: #185757;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.request-item .btn:hover {
-    background-color: #031669;
-}
-footer {
-    color: #050505;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}

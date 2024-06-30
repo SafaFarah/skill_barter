@@ -1,0 +1,114 @@
+/* edit-profile */
+body {
+    background-color: white;
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+nav {
+    flex: 1; 
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+nav ul li {
+    margin-right: 20px; 
+}
+
+nav ul li a {
+    color: #2206c0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Logo styles */
+.logo {
+    width: 200px; /* Adjust size as needed */
+    margin-top: 30px;
+}
+
+main {
+    padding: 20px;
+}
+
+.edit-profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+}
+
+.edit-profile-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.edit-profile-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-form label {
+    margin-bottom: 10px;
+    color: #4105ce;
+}
+
+.edit-profile-form input[type="text"],
+.edit-profile-form input[type="email"],
+.edit-profile-form input[type="number"],
+.edit-profile-form select,
+.edit-profile-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.edit-profile-form select {
+    width: 100%;
+    padding: 10px;
+}
+
+.edit-profile-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.edit-profile-form .save-btn {
+    background-color: #2206c0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.edit-profile-form .save-btn:hover {
+    background-color: #031669;
+}
+

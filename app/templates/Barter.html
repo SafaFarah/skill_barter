@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillBarter - Barter</title>
+    <title>Barters</title>
     <link rel="stylesheet" href="../static/styles/style2.css">
 </head>
 <body>
@@ -11,34 +11,40 @@
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
         <nav>
             <ul>
-                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
-                    <li><a href="{{ url_for('barter') }}">Barter</a></li>
-                    <li><a href="{{ url_for('requests') }}">Requests</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
+                <li><a href="{{ url_for('log out') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="exchanges">
-            <h1>Available Barters</h1>
-            <div class="barter">
-                <h2>Web Development</h2>
-                <p>Offering expertise in HTML and CSS. Seeking graphic design skills.</p>
-                <img src="images/web-development.jpg" alt="Web Development">
-                <button class="btn">Request Barter</button>
+        <div class="container">
+            <div class="top-bar">
+                <div class="search-container">
+                    <form method="GET" action="{{ url_for('barter') }}">
+                        <label for="offered_skill">Offered Skill:</label>
+                        <input type="text" id="offered_skill" name="offered_skill" value="{{ request.args.get('offered_skill', '') }}">
+                        
+                        <label for="requested_skill">Requested Skill:</label>
+                        <input type="text" id="requested_skill" name="requested_skill" value="{{ request.args.get('requested_skill', '') }}">
+                        
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+                </div>
             </div>
-            <div class="barter">
-                <h2>Graphic Design</h2>
-                <p>Providing graphic design services. Interested in learning video editing.</p>
-                <img src="images/graphic-design.jpg" alt="Graphic Design">
-                <button class="btn">Request Barter</button>
+            <div class="barter-list">
+                {% for barter in barters %}
+                <div class="barter-item">
+                    <h2>{{ barter.title }}</h2>
+                    <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
+                    <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
+                    <p>{{ barter.description }}</p>
+                </div>
+                {% endfor %}
             </div>
-            <!-- Add more barters here -->
-        </section>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
-    </footer>
 </body>
 </html>
-

@@ -1,4 +1,4 @@
-/* General styles */
+/* main styles */
 body {
     background-color: white;
     font-family: Georgia, serif;
@@ -35,7 +35,7 @@ nav ul li a {
     color: #2206c0;
     text-decoration: none;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 /* Logo styles */

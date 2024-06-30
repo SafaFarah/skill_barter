@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillBarter - Requests</title>
+    <title>Requests</title>
     <link rel="stylesheet" href="../static/styles/style4.css">
 </head>
 <body>
@@ -11,36 +11,63 @@
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
         <nav>
             <ul>
-                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
-                    <li><a href="{{ url_for('barter') }}">Barter</a></li>
-                    <li><a href="{{ url_for('requests') }}">Requests</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('barter') }}">Barters</a></li>
+                <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
+                <li><a href="{{ url_for('log out') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="requests">
-            <h1>Requests</h1>
-            <div class="request-list">
-                <div class="request-item">
-                    <h2>Request Title 1</h2>
-                    <p>Description of request goes here. Include details about what is needed.</p>
-                    <p>Requested By: User123</p>
-                    <button class="btn">View Details</button>
-                </div>
-                <div class="request-item">
-                    <h2>Request Title 2</h2>
-                    <p>Description of request goes here. Include details about what is needed.</p>
-                    <p>Requested By: User456</p>
-                    <button class="btn">View Details</button>
-                </div>
-                <!-- More request items can be added dynamically or statically -->
+        <div class="container">
+            <div class="barter-sections">
+                <section class="my-barters">
+                    <h2>Barters I Created</h2>
+                    <div class="barter-list">
+                        {% for barter in my_barters %}
+                        <div class="barter-item">
+                            <h3>{{ barter.title }}</h3>
+                            <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
+                            <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
+                            <p>{{ barter.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section class="requested-barters">
+                    <h2>Barters I Requested</h2>
+                    <div class="barter-list">
+                        {% for barter in requested_barters %}
+                        <div class="barter-item">
+                            <h3>{{ barter.title }}</h3>
+                            <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
+                            <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
+                            <p>{{ barter.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section class="responses-barters">
+                    <h2>Responses to My Barters</h2>
+                    <div class="barter-list">
+                        {% for response in barter_responses %}
+                        <div class="barter-item">
+                            <h3>{{ response.barter.title }}</h3>
+                            <p><strong>Responder:</strong> {{ response.responder.username }}</p>
+                            <p><strong>Offered Skill:</strong> {{ response.offered_skill }}</p>
+                            <p><strong>Requested Skill:</strong> {{ response.requested_skill }}</p>
+                            <p>{{ response.message }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 SkillBarter. All rights reserved.</p>
-    </footer>
 </body>
 </html>
 

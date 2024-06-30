@@ -1,0 +1,93 @@
+/*barter_details*/
+body {
+    background-color: white;
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
+
+nav {
+    flex: 1; 
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+nav ul li {
+    margin-right: 20px; 
+}
+
+nav ul li a {
+    color: #2206c0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Logo styles */
+.logo {
+    width: 200px;
+    margin-top: 10px;
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.barter-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+}
+
+.barter-details h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.barter-details p {
+    margin-bottom: 10px;
+}
+
+.creator-info {
+    margin-top: 20px;
+}
+
+.creator-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.creator-info p {
+    margin-bottom: 10px;
+}

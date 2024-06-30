@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Barter</title>
+    <link rel="stylesheet" href="../static/styles/style7.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('barter') }}">Barters</a></li>
+                <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                <li><a href="{{ url_for('log out') }}">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Create New Barter</h1>
+            <form action="{{ url_for('create_barter') }}" method="post">
+                <label for="title">Barter Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <select id="offered_skill" name="offered_skill" required>
+                    <option value="" disabled selected>Select your skill</option>
+                    <option value="Python" {% if 'Python' in user.skills_i_have %}selected{% endif %}>Python</option>
+                    <option value="JavaScript" {% if 'JavaScript' in user.skills_i_have %}selected{% endif %}>JavaScript</option>
+                    <option value="HTML" {% if 'HTML' in user.skills_i_have %}selected{% endif %}>HTML</option>
+                    <option value="CSS" {% if 'CSS' in user.skills_i_have %}selected{% endif %}>CSS</option>
+                    <option value="Data Analysis" {% if 'Data Analysis' in user.skills_i_have %}selected{% endif %}>Data Analysis</option>
+                    <option value="Machine Learning" {% if 'Machine Learning' in user.skills_i_have %}selected{% endif %}>Machine Learning</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="requested_skill">Requested Skill</label>
+                <select id="requested_skill" name="requested_skill" required>
+                    <option value="" disabled selected>Select desired skill</option>
+                    <option value="Python" {% if 'Python' in user.skills_i_want %}selected{% endif %}>Python</option>
+                    <option value="JavaScript" {% if 'JavaScript' in user.skills_i_want %}selected{% endif %}>JavaScript</option>
+                    <option value="HTML" {% if 'HTML' in user.skills_i_want %}selected{% endif %}>HTML</option>
+                    <option value="CSS" {% if 'CSS' in user.skills_i_want %}selected{% endif %}>CSS</option>
+                    <option value="Data Analysis" {% if 'Data Analysis' in user.skills_i_want %}selected{% endif %}>Data Analysis</option>
+                    <option value="Machine Learning" {% if 'Machine Learning' in user.skills_i_want %}selected{% endif %}>Machine Learning</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <input type="submit" value="Create Barter">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
