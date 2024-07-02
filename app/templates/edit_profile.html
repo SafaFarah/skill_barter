@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - {{ user.username }}</title>
+    <link rel="stylesheet" href="../static/styles/style6.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
+                <li><a href="{{ url_for('barter') }}">Barters</a></li>
+                <li><a href="{{ url_for('requests') }}">Requests</a></li>
+                <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="edit-profile-form">
+            <div class="container">
+                <h1>Edit Your Profile</h1>
+                <form action="{{ url_for('edit_profile') }}" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+                    <label for="bio">Bio:</label>
+                    <textarea id="bio" name="bio" rows="4" required>{{ user.bio }}</textarea>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male" {% if user.gender == 'male' %} selected {% endif %}>Male</option>
+                        <option value="female" {% if user.gender == 'female' %} selected {% endif %}>Female</option>
+                    </select>
+
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" value="{{ user.age }}" required>
+                    
+                    <label for="skills_i_have">Skills I Have:</label>
+                <div id="skills_i_have_container">
+                    {% for skill in user_skills_i_have %}
+                    <div class="skill-item">
+                        {{ skill }}
+                        <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_have', '{{ skill }}')">Remove</button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <select id="skills_i_have" class="skill-select">
+                    <option disabled selected>-- Select a skill --</option>
+                    {% for skill in skills %}
+                    <option value="{{ skill }}">{{ skill }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="add-skill-button" onclick="addSkill('skills_i_have')">Add Skill</button>
+                <input type="hidden" id="skills_i_have_hidden" name="skills_i_have" value="{{ user.skills_i_have }}">
+
+                <label for="skills_i_want">Skills I Want:</label>
+                <div id="skills_i_want_container">
+                    {% for skill in user_skills_i_want %}
+                    <div class="skill-item">
+                        {{ skill }}
+                        <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_want', '{{ skill }}')">Remove</button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <select id="skills_i_want" class="skill-select">
+                    <option disabled selected>-- Select a skill --</option>
+                    {% for skill in skills %}
+                    <option value="{{ skill }}">{{ skill }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="add-skill-button" onclick="addSkill('skills_i_want')">Add Skill</button>
+                <input type="hidden" id="skills_i_want_hidden" name="skills_i_want" value="{{ user.skills_i_want }}">
+
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="../static/js/script1.js"></script>
+</body>
+</html>

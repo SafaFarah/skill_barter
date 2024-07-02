@@ -12,11 +12,11 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
-                <li><a href="{{ url_for('log out') }}">Log out</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -29,8 +29,8 @@
                         {% for barter in my_barters %}
                         <div class="barter-item">
                             <h3>{{ barter.title }}</h3>
-                            <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
-                            <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
+                            <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+                            <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                             <p>{{ barter.description }}</p>
                         </div>
                         {% endfor %}
@@ -43,8 +43,8 @@
                         {% for barter in requested_barters %}
                         <div class="barter-item">
                             <h3>{{ barter.title }}</h3>
-                            <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
-                            <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
+                            <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+                            <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                             <p>{{ barter.description }}</p>
                         </div>
                         {% endfor %}

@@ -1,22 +1,19 @@
-from . import db
-from models.base_model import BaseModel
+from app import db
 
-class Barter(db.Model, BaseModel):
-    __tablename__ = 'barters'
-
+class Barter(db.Model):
+    __tablename__ = 'barter'
     id = db.Column(db.Integer, primary_key=True)
-    skill_offered = db.Column(db.String(80), nullable=False)
-    skill_requested = db.Column(db.String(80), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.ID'), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime, nullable=False)
+    title = db.Column(db.String(100))
+    skill_offered = db.Column(db.String(100))
+    skill_requested = db.Column(db.String(100))
+    description = db.Column(db.String(255))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    requester_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    status = db.Column(db.String(50), default='available')  # 'available', 'requested', 'accepted'
 
-    def __init__(self, skill_offered, skill_requested, user_id, **kwargs):
-        super().__init__(**kwargs)
-        self.skill_offered = skill_offered
-        self.skill_requested = skill_requested
-        self.user_id = user_id
+    user = db.relationship('User', foreign_keys=[user_id], back_populates='barters_created')
+    requester = db.relationship('User', foreign_keys=[requester_id], back_populates='barters_requested')
 
-    def __str__(self):
-        return f"[Barter] ({self.id}) Offered: {self.skill_offered}, Requested: {self.skill_requested}, User: {self.user_id}"
+    def __repr__(self):
+        return f'<Barter {self.title}>'
 

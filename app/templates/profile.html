@@ -16,7 +16,7 @@
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
-                <li><a href="{{ url_for('log out') }}">Log out</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -25,19 +25,16 @@
             <div class="container">
                 <h1>Welcome, {{ user.username }}</h1>
                 <div class="profile-details">
-                    <img src="{{ user.profile_picture }}" alt="Profile Picture">
-                    <label>Bio:</label>
-                    <p>{{ user.bio }}</p>
-                    <label>Email:</label>
-                    <p>{{ user.email }}</p>
-                    <label>Gender:</label>
-                    <p>{{ user.gender }}</p>
-                    <label>Age:</label>
-                    <p>{{ user.age }}</p>
-                    <label>Skills I Have:</label>
-                    <p>{{ user.skills_i_have | join(', ') }}</p>
-                    <label>Skills I Want:</label>
-                    <p>{{ user.skills_i_want | join(', ') }}</p>
+                    <div class="profile-picture">
+                            <img src="{{ url_for('static', filename='images/default_profile.png') }}" alt="Default Profile Picture">
+                    </div>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Bio:</strong> {% if user.bio %} {{ user.bio }} {% else %} {% endif %}</p>
+                    <p><strong>Gender:</strong> {% if user.gender %} {{ user.gender }} {% else %} {% endif %}</p>
+                    <p><strong>Age:</strong> {% if user.age %} {{ user.age }} {% else %} {% endif %}</p>
+                    <p><strong>Skills I Have:</strong> {% if user.skills_i_have %} {{ user.skills_i_have }} {% else %} {% endif %}</p>
+                    <p><strong>Skills I Want:</strong> {% if user.skills_i_want %} {{ user.skills_i_want}} {% else %} {% endif %}</p>
+                    <p>View your ongoing barters <a href="{{ url_for('ongoing_barters') }}">here</a>.</p>
                 </div>
                 <a href="{{ url_for('edit_profile') }}" class="edit-btn">Edit Profile</a>
             </div>

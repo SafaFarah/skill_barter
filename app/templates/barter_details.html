@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>Barter Details</title>
     <link rel="stylesheet" href="../static/styles/style8.css">
 </head>
 <body>
@@ -12,29 +12,35 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
-                <li><a href="{{ url_for('log out') }}">Log out</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
-        <main>
-        <div class="container">
-            <h2>{{ barter.title }}</h2>
-            <div class="barter-details">
-                <p><strong>Offered Skill:</strong> {{ barter.offered_skill }}</p>
-                <p><strong>Requested Skill:</strong> {{ barter.requested_skill }}</p>
-                <p><strong>Description:</strong> {{ barter.description }}</p>
-                <h3>Created By</h3>
-                <div class="creator-info">
-                    <img src="{{ barter.creator.profile_picture }}" alt="Creator's Profile Picture">
-                    <p><strong>Username:</strong> {{ barter.creator.username }}</p>
-                    <p><strong>Email:</strong> {{ barter.creator.email }}</p>
-                </div>
-            </div>
-        </div>
+    <main>
+        <section class="barter-details">
+            <h1>{{ barter.title }}</h1>
+            <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+            <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
+            <p>{{ barter.description }}</p>
+            <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
+
+            {% if user_id and user_id != barter.user.id and barter.status == 'available' %}
+            <form action="{{ url_for('barter_details', barter_id=barter.id) }}" method="post">
+                <button type="submit">Request this Barter</button>
+            </form>
+            {% elif user_id == barter.user.id and barter.status == 'requested' %}
+            <p><strong>Requested by:</strong> <a href="{{ url_for('profile', user_id=barter.requester.id) }}">{{ barter.requester.username }}</a></p>
+            <form action="{{ url_for('requests') }}" method="post">
+                <input type="hidden" name="barter_id" value="{{ barter.id }}">
+                <button type="submit" name="action" value="accept">Accept</button>
+                <button type="submit" name="action" value="remove">Remove</button>
+            </form>
+            {% endif %}
+        </section>
     </main>
 </body>
 </html>
