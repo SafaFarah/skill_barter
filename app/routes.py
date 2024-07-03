@@ -2,9 +2,7 @@ from flask import render_template, request, redirect, url_for, flash, session
 from app import app, db
 from models.user import User
 from models.barter import Barter
-from werkzeug.utils import secure_filename
-import os
-from PIL import Image
+from models.request import Request
 
 @app.route('/')
 def index():
@@ -59,13 +57,12 @@ def main():
     user_id = session.get('user_id')
     if user_id:
         user = User.query.get(user_id)
-        return render_template('main.html', user=user)
+        return render_template('main.html', user=user, user_id=user_id)
     flash('Please log in to access this page.', 'error')
     return redirect(url_for('signin'))
 
-@app.route('/profile')
-def profile():
-    user_id = session.get('user_id')
+@app.route('/profile/<int:user_id>')
+def profile(user_id):
     if not user_id:
         flash('You must be logged in to access this page', 'error')
         return redirect(url_for('signin'))
@@ -75,11 +72,7 @@ def profile():
         flash('User not found', 'error')
         return redirect(url_for('signin'))
 
-    return render_template('profile.html', user=user)
-
-# Set the upload folder path
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'app', 'static', 'profile_pics')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    return render_template('profile.html', user=user, user_id=user_id)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 def edit_profile():
@@ -100,33 +93,47 @@ def edit_profile():
             return redirect(url_for('edit_profile'))
 
         user.username = username
-        user.username = username
         user.email = request.form.get('email')
         user.bio = request.form.get('bio')
         user.gender = request.form.get('gender')
         user.age = request.form.get('age')
         user.skills_i_have = ','.join(request.form.getlist('skills_i_have'))
         user.skills_i_want = ','.join(request.form.getlist('skills_i_want'))
+
         db.session.commit()
         flash('Profile updated successfully', 'success')
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', user_id=user_id))
 
-    skills = ['Python', 'JavaScript', 'HTML', 'CSS', 'Data Analysis', 'Machine Learning']  # Add more skills as needed
+    # List of available skills
+    skills = ['Python', 'C', 'C++', 'JavaScript', 'HTML', 'CSS', 'Data Analysis', 'Machine Learning']
+
+    # Split user's skills into lists
     user_skills_i_have = user.skills_i_have.split(',') if user.skills_i_have else []
     user_skills_i_want = user.skills_i_want.split(',') if user.skills_i_want else []
 
-    return render_template('edit_profile.html', user=user, skills=skills, user_skills_i_have=user_skills_i_have, user_skills_i_want=user_skills_i_want)
+    return render_template('edit_profile.html', user=user, user_id=user_id, skills=skills, user_skills_i_have=user_skills_i_have, user_skills_i_want=user_skills_i_want)
 
 @app.route('/barter')
 def barter():
     user_id = session.get('user_id')
     if not user_id:
-        flash('You must be logged in to view this page', 'error')
+        flash('You must be logged in to access this page', 'error')
         return redirect(url_for('signin'))
 
-    barters = Barter.query.filter_by(user_id=user_id).all()
-    return render_template('barter.html', barters=barters)
+    skill_offered = request.args.get('skill_offered', '')
+    skill_requested = request.args.get('skill_requested', '')
 
+    # Perform filtering based on skill_offered and skill_requested
+    if skill_offered and skill_requested:
+        barters = Barter.query.filter_by(skill_offered=skill_offered, skill_requested=skill_requested).all()
+    elif skill_offered:
+        barters = Barter.query.filter_by(skill_offered=skill_offered).all()
+    elif skill_requested:
+        barters = Barter.query.filter_by(skill_requested=skill_requested).all()
+    else:
+        barters = Barter.query.all()
+
+    return render_template('barter.html', barters=barters, user_id=user_id)
 
 @app.route('/create_barter', methods=['GET', 'POST'])
 def create_barter():
@@ -146,23 +153,70 @@ def create_barter():
         skill_requested = request.form.get('skill_requested')
         description = request.form.get('description')
 
-        # Create a new barter object
-        new_barter = Barter(
+        if not title or not skill_offered or not skill_requested:
+            flash('Title, offered skill, and requested skill cannot be empty', 'error')
+            return redirect(url_for('create_barter'))
+
+        barter = Barter(
             title=title,
             skill_offered=skill_offered,
             skill_requested=skill_requested,
             description=description,
-            user_id=user.id  # Assign the logged-in user's ID to the barter
+            user_id=user_id,
+            status='available'
         )
 
-        db.session.add(new_barter)
+        db.session.add(barter)
         db.session.commit()
-
         flash('Barter created successfully', 'success')
-        return redirect(url_for('requests'))  # Redirect to requests page after creating barter
+        return redirect(url_for('barter'))
 
-    return render_template('create_barter.html', user=user)
+    return render_template('create_barter.html', user=user, user_id=user_id)
 
+@app.route('/barter_details/<int:barter_id>', methods=['GET', 'POST'])
+def barter_details(barter_id):
+    user_id = session.get('user_id')
+    barter = Barter.query.get(barter_id)
+
+    if not barter:
+        flash('Barter not found', 'error')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        action = request.form.get('action')
+
+        if action == 'request':
+            # Handle request creation
+            new_request = Request(
+                user_id=user_id,
+                barter_id=barter.id
+            )
+            db.session.add(new_request)
+            db.session.commit()
+            flash('Request sent successfully', 'success')
+
+            # Update barter status to 'requested'
+            barter.status = 'requested'
+            barter.requester_id = user_id
+            db.session.commit()
+            return redirect(url_for('requests'))
+
+        elif action == 'accept':
+            # Handle request acceptance
+            barter.status = 'accepted'
+            db.session.commit()
+            flash('Barter accepted successfully', 'success')
+            return redirect(url_for('requests'))
+
+        elif action == 'remove':
+            # Handle request removal
+            barter.status = 'available'
+            barter.requester_id = None
+            db.session.commit()
+            flash('Request removed successfully', 'success')
+            return redirect(url_for('requests'))
+
+    return render_template('barter_details.html', barter=barter, user_id=user_id)
 
 @app.route('/requests')
 def requests():
@@ -185,7 +239,7 @@ def requests():
     # You may have another method to fetch responses to the user's barters
     barter_responses = []  # Replace with your logic to fetch responses
 
-    return render_template('requests.html', user=user, my_barters=my_barters, requested_barters=requested_barters, barter_responses=barter_responses)
+    return render_template('requests.html', user=user, user_id=user_id, my_barters=my_barters, requested_barters=requested_barters, barter_responses=barter_responses)
 
 @app.route('/ongoing_barters')
 def ongoing_barters():

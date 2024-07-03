@@ -94,21 +94,56 @@ main {
     resize: vertical; /* Allow vertical resizing */
 }
 
-.edit-profile-form .save-btn {
-    background-color: #2206c0;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
+.submit-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Remove borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.edit-profile-form .save-btn:hover {
-    background-color: #031669;
+.submit-button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
 
+/* Add styling for the skill section containers */
+.skill-section {
+    margin-bottom: 20px; /* Space between sections */
+}
+
+.skill-section label {
+    display: block; /* Block display for labels */
+    margin-bottom: 5px; /* Space below labels */
+}
+
+.skill-section select {
+    margin-top: 5px; /* Space above select dropdown */
+    margin-bottom: 10px; /* Space below select dropdown */
+}
+
+.skill-item {
+    display: inline-block; /* Inline block for skill items */
+    margin-right: 10px; /* Space between skill items */
+    margin-bottom: 10px; /* Space below skill items */
+    padding: 5px 10px; /* Padding */
+    background-color: #f1f1f1; /* Light background */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.remove-skill-button {
+    background-color: #e74c3c; /* Red background */
+    color: white; /* White text */
+    border: none; /* Remove borders */
+    border-radius: 3px; /* Rounded corners */
+    margin-left: 5px; /* Space between skill item and button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 12px; /* Smaller font size */
+    padding: 2px 5px; /* Padding */
+}
+
+.remove-skill-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}

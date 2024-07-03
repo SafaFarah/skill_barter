@@ -12,26 +12,63 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
+                <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>My Barters</h1>
-        <div class="barter-list">
-            {% for barter in barters %}
-            <div class="barter-item">
-                <h3>{{ barter.title }}</h3>
-                <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
-                <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
-                <p>{{ barter.description }}</p>
-                <p><strong>Status:</strong> {{ barter.status }}</p>
+        <main>
+        <section class="barter-list">
+            <div class="filter">
+                <form action="{{ url_for('barter') }}" method="GET">
+                    <label for="skill_offered">Offered Skill:</label>
+                    <select id="skill_offered" name="skill_offered">
+                        <option value="">All</option>
+                        <option value="Python">Python</option>
+                        <option value="C">C</option>
+                        <option value="C++">C++</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning">Machine Learning</option>
+
+                    </select>
+
+                    <label for="skill_requested">Requested Skill:</label>
+                    <select id="skill_requested" name="skill_requested">
+                        <option value="">All</option>
+                        <option value="Python">Python</option>
+                        <option value="C">C</option>
+                        <option value="C++">C++</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                    </select>
+
+                    <button type="submit">Filter</button>
+                </form>
             </div>
-            {% endfor %}
-        </div>
+            <div class="barter-items">
+                {% for barter in barters %}
+                <div class="barter-item">
+                    <h2><a href="{{ url_for('barter_details', barter_id=barter.id) }}">{{ barter.title }}</a></h2>
+                    <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+                    <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
+                    <p>{{ barter.description }}</p>
+                    <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
+                    <div class="barter-item">
+                        <p class="status {{ barter.status }}">{{ barter.status }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
     </main>
     </body>
 </html>

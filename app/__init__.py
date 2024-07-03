@@ -35,6 +35,7 @@ from models.user import User
 from models.barter import Barter
 from models.skill import Skill
 from models.barter_response import BarterResponse
+from models.request import Request 
 
 @login_manager.user_loader
 def load_user(user_id):

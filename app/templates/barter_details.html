@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
@@ -20,16 +20,18 @@
             </ul>
         </nav>
     </header>
-    <main>
+        <main>
         <section class="barter-details">
             <h1>{{ barter.title }}</h1>
             <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
             <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
             <p>{{ barter.description }}</p>
             <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
+            <button class="status-button {{ barter.status }}">{{ barter.status }}</button>
 
             {% if user_id and user_id != barter.user.id and barter.status == 'available' %}
             <form action="{{ url_for('barter_details', barter_id=barter.id) }}" method="post">
+                <input type="hidden" name="action" value="request">
                 <button type="submit">Request this Barter</button>
             </form>
             {% elif user_id == barter.user.id and barter.status == 'requested' %}
@@ -41,6 +43,6 @@
             </form>
             {% endif %}
         </section>
-    </main>
-</body>
+        </main>
+    </body>
 </html>

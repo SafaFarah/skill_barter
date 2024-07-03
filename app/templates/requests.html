@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
@@ -24,15 +24,18 @@
         <div class="container">
             <div class="barter-sections">
                 <section class="my-barters">
-                    <h2>Barters I Created</h2>
+                    <h2>My Barters</h2>
                     <div class="barter-list">
                         {% for barter in my_barters %}
-                        <div class="barter-item">
-                            <h3>{{ barter.title }}</h3>
-                            <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
-                            <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
-                            <p>{{ barter.description }}</p>
-                        </div>
+                            <div class="barter-item">
+                                <h2><a href="{{ url_for('barter_details', barter_id=barter.id) }}">{{ barter.title }}</a></h2>
+                                <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+                                <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
+                                <p>{{ barter.description }}</p>
+                                <div class="barter-item">
+                                    <p class="status {{ barter.status }}">{{ barter.status }}</p>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 </section>
@@ -42,10 +45,13 @@
                     <div class="barter-list">
                         {% for barter in requested_barters %}
                         <div class="barter-item">
-                            <h3>{{ barter.title }}</h3>
+                            <h2><a href="{{ url_for('barter_details', barter_id=barter.id) }}">{{ barter.title }}</a></h2>
                             <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
                             <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                             <p>{{ barter.description }}</p>
+                            <div class="barter-item">
+                                <p class="status {{ barter.status }}">{{ barter.status }}</p>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>

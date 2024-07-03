@@ -1,91 +1,68 @@
-function addSkill(selectId) {
-    var selectElement = document.getElementById(selectId);
+// Function to add a selected skill to the display area
+function addSelectedSkill(containerId) {
+    var selectElement = document.getElementById(containerId);
     var selectedSkill = selectElement.options[selectElement.selectedIndex].value;
 
-    if (selectedSkill !== "-- Select a skill --") {
-        var containerId = selectId + "_container";
-        var containerElement = document.getElementById(containerId);
-        var hiddenInput = document.getElementById(selectId + "_hidden");
+    if (selectedSkill === '-- Select a skill --') {
+        return;
+    }
 
-        // Check if skill already added
-        if (!hiddenInput.value.includes(selectedSkill)) {
-            // Create a new div for the skill
-            var skillDiv = document.createElement('div');
-            skillDiv.textContent = selectedSkill;
-            skillDiv.className = 'skill-item';
-
-            // Add a remove button
-            var removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.className = 'remove-skill-button';
-            removeButton.onclick = function() {
-                containerElement.removeChild(skillDiv);
-                hiddenInput.value = hiddenInput.value.replace(selectedSkill + ',', '');
-            };
-            skillDiv.appendChild(removeButton);
-
-            // Append the new skill to the list
-            containerElement.appendChild(skillDiv);
-
-            // Update the hidden input value
-            hiddenInput.value += selectedSkill + ',';
+    // Check if the skill is already added
+    var skillsContainer = document.getElementById(containerId + '_container');
+    var skillsList = skillsContainer.querySelectorAll('.skill-item');
+    for (var i = 0; i < skillsList.length; i++) {
+        var skill = skillsList[i].innerText.trim();
+        if (skill === selectedSkill) {
+            alert('Skill already added!');
+            return;
         }
     }
+
+    // Create a new skill item
+    var skillItem = document.createElement('div');
+    skillItem.classList.add('skill-item');
+    skillItem.textContent = selectedSkill;
+
+    // Create a remove button
+    var removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.type = 'button';
+    removeButton.classList.add('remove-skill-button');
+    removeButton.setAttribute('onclick', 'removeSkill("' + containerId + '", "' + selectedSkill + '")');
+
+    // Append the skill item and remove button to the container
+    skillItem.appendChild(removeButton);
+    skillsContainer.appendChild(skillItem);
+
+    // Update hidden input field with selected skills
+    var hiddenInput = document.getElementById(containerId + '_hidden');
+    var currentSkills = hiddenInput.value ? hiddenInput.value.split(',') : [];
+    currentSkills.push(selectedSkill);
+    hiddenInput.value = currentSkills.join(',');
 }
 
-function removeSkill(containerId, skill) {
-    var containerElement = document.getElementById(containerId + "_container");
-    var hiddenInput = document.getElementById(containerId + "_hidden");
+// Function to remove a selected skill from the display area
+function removeSkill(containerId, skillToRemove) {
+    var skillsContainer = document.getElementById(containerId + '_container');
+    var skillsList = skillsContainer.querySelectorAll('.skill-item');
 
-    // Remove skill from display
-    var skillElements = containerElement.getElementsByClassName('skill-item');
-    for (var i = 0; i < skillElements.length; i++) {
-        if (skillElements[i].textContent.trim() === skill) {
-            containerElement.removeChild(skillElements[i]);
+    for (var i = 0; i < skillsList.length; i++) {
+        var skillItem = skillsList[i];
+        var skill = skillItem.childNodes[0].nodeValue.trim();
+
+        if (skill === skillToRemove) {
+            skillsContainer.removeChild(skillItem);
+
+            // Update hidden input field with removed skill
+            var hiddenInput = document.getElementById(containerId + '_hidden');
+            var currentSkills = hiddenInput.value ? hiddenInput.value.split(',') : [];
+            var index = currentSkills.indexOf(skillToRemove);
+            if (index !== -1) {
+                currentSkills.splice(index, 1);
+                hiddenInput.value = currentSkills.join(',');
+            }
             break;
         }
     }
-
-    // Update hidden input value
-    hiddenInput.value = hiddenInput.value.replace(skill + ',', '');
-}
-
-window.onload = function() {
-    var skillsIHave = "{{ user_skills_i_have|join(',') }}".split(',');
-    var skillsIWant = "{{ user_skills_i_want|join(',') }}".split(',');
-
-    initializeSkillList('skills_i_have', skillsIHave);
-    initializeSkillList('skills_i_want', skillsIWant);
-};
-
-function initializeSkillList(selectId, skills) {
-    var containerId = selectId + "_container";
-    var containerElement = document.getElementById(containerId);
-    var hiddenInput = document.getElementById(selectId + "_hidden");
-
-    skills.forEach(function(skill) {
-        if (skill.trim() !== '') {
-            // Create a new div for the skill
-            var skillDiv = document.createElement('div');
-            skillDiv.textContent = skill;
-            skillDiv.className = 'skill-item';
-
-            // Add a remove button
-            var removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.className = 'remove-skill-button';
-            removeButton.onclick = function() {
-                containerElement.removeChild(skillDiv);
-                hiddenInput.value = hiddenInput.value.replace(skill + ',', '');
-            };
-            skillDiv.appendChild(removeButton);
-
-            // Append the new skill to the list
-            containerElement.appendChild(skillDiv);
-        }
-    });
-
-    // Set the hidden input value
-    hiddenInput.value = skills.join(',');
 }
 

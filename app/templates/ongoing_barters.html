@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('main') }}">Home</a></li>
-                <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
                 <li><a href="{{ url_for('requests') }}">Requests</a></li>
                 <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
