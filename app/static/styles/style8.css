@@ -50,21 +50,23 @@ main {
 }
 
 .barter-details {
-    background-color: #fff;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
 }
 
 .barter-details h1 {
-    color: #333;
+    color: #004AAD;
     font-size: 28px;
     margin-bottom: 10px;
 }
 
 .barter-details p {
     margin-bottom: 10px;
+    font-size: 18px;
     line-height: 1.6;
 }
 
@@ -77,24 +79,23 @@ main {
     text-decoration: none;
 }
 
-.status-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
+/* Status text styles */
+.status-text {
+    font-weight: bold;
+    font-size: 18px;
 }
 
-.status-button.available {
-    background-color: #28a745; /* Green background for available status */
-    color: white;
+.status-text.available {
+    color: green;
 }
 
-.status-button.requested {
-    background-color: #dc3545; /* Red background for requested status */
-    color: white;
+.status-text.requested {
+    color: red;
 }
 
+.status-text.accepted {
+    color: blue;
+}
 form {
     margin-top: 10px;
 }
@@ -102,18 +103,19 @@ form {
 form button {
     margin-right: 10px;
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #28a745;
 }
 
 form button.accept {
     background-color: #28a745; /* Green background for accept button */
-    color: white;
+    color: green;
 }
 
 form button.remove {
     background-color: #dc3545; /* Red background for remove button */
-    color: white;
+    color: red;
 }

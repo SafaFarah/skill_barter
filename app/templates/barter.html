@@ -62,9 +62,7 @@
                     <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                     <p>{{ barter.description }}</p>
                     <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
-                    <div class="barter-item">
-                        <p class="status {{ barter.status }}">{{ barter.status }}</p>
-                    </div>
+                <p class="status-text {{ barter.status }}">{{ barter.status }}</p>
                 </div>
                 {% endfor %}
             </div>

@@ -12,7 +12,6 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('create_barter') }}">Create Barter</a></li>
                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
         </nav>
@@ -21,9 +20,10 @@
         <div class="list">
             <img src="../static/images/main.png" alt="Welcome to SkillBarter">
             <div class="action-buttons">
-                <a  href="{{ url_for('profile', user_id=user_id) }}" class="btn">Profile</a>
+                <a href="{{ url_for('profile', user_id=user_id) }}" class="btn">Profile</a>
                 <a href="{{ url_for('barter') }}" class="btn">Barters</a>
                 <a href="{{ url_for('requests') }}" class="btn">Requests</a>
+                <a href="{{ url_for('create_barter') }}" class="btn">Create Barter</a>
             </div>
         </div>
     </main>

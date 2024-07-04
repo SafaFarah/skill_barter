@@ -131,7 +131,7 @@ def barter():
     elif skill_requested:
         barters = Barter.query.filter_by(skill_requested=skill_requested).all()
     else:
-        barters = Barter.query.all()
+        barters = Barter.query.filter(Barter.status.in_(['available', 'requested'])).all()
 
     return render_template('barter.html', barters=barters, user_id=user_id)
 
@@ -234,29 +234,13 @@ def requests():
     my_barters = Barter.query.filter_by(user_id=user.id).all()
 
     # Fetch barters requested by the logged-in user
-    requested_barters = Barter.query.filter_by(requester_id=user.id).all()
+    requested_barters = Barter.query.filter_by(requester_id=user.id).filter(Barter.status != 'accepted').all()
+    ongoing_barters = Barter.query.filter(
+        (Barter.user_id == user_id) | (Barter.requester_id == user_id),
+        Barter.status == 'accepted'
+    ).all()
 
-    # You may have another method to fetch responses to the user's barters
-    barter_responses = []  # Replace with your logic to fetch responses
-
-    return render_template('requests.html', user=user, user_id=user_id, my_barters=my_barters, requested_barters=requested_barters, barter_responses=barter_responses)
-
-@app.route('/ongoing_barters')
-def ongoing_barters():
-    user_id = session.get('user_id')
-    if not user_id:
-        flash('You must be logged in to access this page', 'error')
-        return redirect(url_for('signin'))
-
-    user = User.query.get(user_id)
-    if not user:
-        flash('User not found', 'error')
-        return redirect(url_for('signin'))
-
-    # Query barters where both parties have accepted (assuming a 'accepted' status)
-    ongoing_barters = Barter.query.filter_by(status='accepted').all()
-
-    return render_template('ongoing_barters.html', user=user, ongoing_barters=ongoing_barters)
+    return render_template('requests.html', user=user, user_id=user_id, my_barters=my_barters, requested_barters=requested_barters, ongoing_barters=ongoing_barters)
 
 @app.route('/logout')
 def logout():

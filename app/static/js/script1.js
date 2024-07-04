@@ -11,7 +11,7 @@ function addSelectedSkill(containerId) {
     var skillsContainer = document.getElementById(containerId + '_container');
     var skillsList = skillsContainer.querySelectorAll('.skill-item');
     for (var i = 0; i < skillsList.length; i++) {
-        var skill = skillsList[i].innerText.trim();
+        var skill = skillsList[i].textContent.trim(); // Use textContent to get the skill text
         if (skill === selectedSkill) {
             alert('Skill already added!');
             return;
@@ -35,10 +35,7 @@ function addSelectedSkill(containerId) {
     skillsContainer.appendChild(skillItem);
 
     // Update hidden input field with selected skills
-    var hiddenInput = document.getElementById(containerId + '_hidden');
-    var currentSkills = hiddenInput.value ? hiddenInput.value.split(',') : [];
-    currentSkills.push(selectedSkill);
-    hiddenInput.value = currentSkills.join(',');
+    updateHiddenSkills(containerId);
 }
 
 // Function to remove a selected skill from the display area
@@ -48,21 +45,30 @@ function removeSkill(containerId, skillToRemove) {
 
     for (var i = 0; i < skillsList.length; i++) {
         var skillItem = skillsList[i];
-        var skill = skillItem.childNodes[0].nodeValue.trim();
+        var skill = skillItem.textContent.trim(); // Use textContent to get the skill text
 
         if (skill === skillToRemove) {
             skillsContainer.removeChild(skillItem);
 
             // Update hidden input field with removed skill
-            var hiddenInput = document.getElementById(containerId + '_hidden');
-            var currentSkills = hiddenInput.value ? hiddenInput.value.split(',') : [];
-            var index = currentSkills.indexOf(skillToRemove);
-            if (index !== -1) {
-                currentSkills.splice(index, 1);
-                hiddenInput.value = currentSkills.join(',');
-            }
+            updateHiddenSkills(containerId);
             break;
         }
     }
+}
+
+// Function to update hidden input field with selected skills
+function updateHiddenSkills(containerId) {
+    var skillsContainer = document.getElementById(containerId + '_container');
+    var skillsList = skillsContainer.querySelectorAll('.skill-item');
+    var hiddenInput = document.getElementById(containerId + '_hidden');
+
+    var currentSkills = [];
+    for (var i = 0; i < skillsList.length; i++) {
+        var skill = skillsList[i].textContent.trim();
+        currentSkills.push(skill);
+    }
+
+    hiddenInput.value = currentSkills.join(',');
 }
 

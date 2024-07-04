@@ -32,9 +32,8 @@
                                 <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
                                 <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                                 <p>{{ barter.description }}</p>
-                                <div class="barter-item">
-                                    <p class="status {{ barter.status }}">{{ barter.status }}</p>
-                                </div>
+                                <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
+                                <p class="status-text {{ barter.status }}">{{ barter.status }}</p>
                             </div>
                         {% endfor %}
                     </div>
@@ -49,24 +48,25 @@
                             <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
                             <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
                             <p>{{ barter.description }}</p>
-                            <div class="barter-item">
-                                <p class="status {{ barter.status }}">{{ barter.status }}</p>
-                            </div>
+                            <p class="status-text {{ barter.status }}">{{ barter.status }}</p>
                         </div>
                         {% endfor %}
                     </div>
                 </section>
-
-                <section class="responses-barters">
-                    <h2>Responses to My Barters</h2>
+                <section class="ongoing-barters">
+                    <h2>Ongoing Barters</h2>
                     <div class="barter-list">
-                        {% for response in barter_responses %}
+                        {% for barter in ongoing_barters %}
                         <div class="barter-item">
-                            <h3>{{ response.barter.title }}</h3>
-                            <p><strong>Responder:</strong> {{ response.responder.username }}</p>
-                            <p><strong>Offered Skill:</strong> {{ response.offered_skill }}</p>
-                            <p><strong>Requested Skill:</strong> {{ response.requested_skill }}</p>
-                            <p>{{ response.message }}</p>
+                            <h3>{{ barter.title }}</h3>
+                            <p><strong>Offered Skill:</strong> {{ barter.skill_offered }}</p>
+                            <p><strong>Requested Skill:</strong> {{ barter.skill_requested }}</p>
+                            <p>{{ barter.description }}</p>
+                            <p><strong>Created by:</strong> <a href="{{ url_for('profile', user_id=barter.user.id) }}">{{ barter.user.username }}</a></p>
+                            {% if barter.status == 'accepted' %}
+                                <p><strong>Status:</strong> Accepted</p>
+                            {% endif %}
+                            <p class="status-text {{ barter.status }}">{{ barter.status }}</p>
                         </div>
                         {% endfor %}
                     </div>
@@ -76,4 +76,3 @@
     </main>
 </body>
 </html>
-

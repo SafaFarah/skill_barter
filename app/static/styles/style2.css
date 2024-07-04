@@ -111,16 +111,21 @@ main {
     text-decoration: underline;
 }
 
-/* Status styles */
-.status p {
+/* Status text styles */
+.status-text {
     font-weight: bold;
     font-size: 18px;
 }
 
-.status.requested p {
-    color: red; /* Red color for requested status */
+.status-text.available {
+    color: green;
 }
 
-.status.available p {
-    color: green; /* Green color for available status */
+.status-text.requested {
+    color: red;
 }
+
+.status-text.accepted {
+    color: blue;
+}
+

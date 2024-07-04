@@ -73,6 +73,27 @@ section {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+}
+
+section h2 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Specific colors for each header */
+.my-barters h2 {
+    color: #4CAF50; /* Green */
+}
+
+.requested-barters h2 {
+    color: #2196F3; /* Blue */
+}
+
+.ongoing-barters h2 {
+    color: #FF9800; /* Orange */
+}
 
 .barter-list {
     display: flex;
@@ -89,5 +110,23 @@ section {
 
 .barter-item h3 {
     margin-top: 0;
+}
+
+/* Status text styles */
+.status-text {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.status-text.available {
+    color: green;
+}
+
+.status-text.requested {
+    color: red;
+}
+
+.status-text.accepted {
+    color: blue;
 }
 

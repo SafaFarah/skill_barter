@@ -1,22 +1,18 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import os
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key_here"
+app.secret_key = "b'\xcc<\xc5\xfc\n\xbb\x96<R(\rH\xdfv\xcf\xc9A\xc4h\x1d\xf0A\xc3|'"
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://skilluser:Fighting.100@localhost/skillbarter'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
-UPLOAD_FOLDER = 'app/static/profile_pics'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
+
 
 # Initialize Flask-Login
 login_manager = LoginManager(app)
