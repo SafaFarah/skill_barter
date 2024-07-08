@@ -21,7 +21,7 @@ SkillBarter is a web application that allows users to barter their skills with o
 - Ongoing barter management
 - Chat functionality for bartering parties
 
-![main Page](screenshout/home.PNG)
+![main Page](screenshout/main.PNG)
 
 ## Technologies Used
 
