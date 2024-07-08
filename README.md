@@ -58,5 +58,6 @@ SkillBarter is a web application that allows users to barter their skills with o
 ## link:
 - deployed project page : https://jisook13.tech/
 - LinkedIn post: https://www.linkedin.com/posts/safafarah_skill-barter-revolutionizing-skill-exchange-activity-7215754553655201792-h1gM?utm_source=share&utm_medium=member_desktop
+
 Happy skill bartering!
 
