@@ -4,6 +4,9 @@ SkillBarter is a web application that allows users to barter their skills with o
 
 ![Landing Page](screenshout/home.PNG)
 
+Inspiration
+The idea for SkillBarter came to me when I found myself frequently needing new skills but lacking the funds to pay for them. I realized that I had valuable skills I could offer in return, and thus, the concept of SkillBarter was born. It's a platform where people can exchange skills, learn from each other, and build a community without the constraint of money.
+
 ## Table of Contents
 
 - [Features](#features)
