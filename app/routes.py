@@ -4,17 +4,21 @@ from models.user import User
 from models.barter import Barter
 from models.request import Request
 
+# Home route
 @app.route('/')
 def index():
+    # Check if user is logged in
     user_id = session.get('user_id')
     if user_id:
         user = User.query.get(user_id)
         return render_template('index.html', user=user)
     return render_template('index.html')
 
+# Signup route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        # Get form data
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
@@ -37,11 +41,14 @@ def signup():
 
     return render_template('signup.html')
 
+# Signin route
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
+        # Get form data
         username = request.form.get('username')
         password = request.form.get('password')
+        # Query user by username
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
             flash('Login Successful', 'success')
@@ -52,6 +59,7 @@ def signin():
 
     return render_template('signin.html')
 
+# Main page route
 @app.route('/main')
 def main():
     user_id = session.get('user_id')
@@ -61,6 +69,7 @@ def main():
     flash('Please log in to access this page.', 'error')
     return redirect(url_for('signin'))
 
+# User profile route
 @app.route('/profile/<int:user_id>')
 def profile(user_id):
     if not user_id:
@@ -85,7 +94,7 @@ def edit_profile():
     if not user:
         flash('User not found', 'error')
         return redirect(url_for('signin'))
-
+    # Get form data
     if request.method == 'POST':
         username = request.form.get('username')
         if not username:
@@ -113,6 +122,7 @@ def edit_profile():
 
     return render_template('edit_profile.html', user=user, user_id=user_id, skills=skills, user_skills_i_have=user_skills_i_have, user_skills_i_want=user_skills_i_want)
 
+# Barter page route
 @app.route('/barter')
 def barter():
     user_id = session.get('user_id')
@@ -135,6 +145,8 @@ def barter():
 
     return render_template('barter.html', barters=barters, user_id=user_id)
 
+
+# Create barter route
 @app.route('/create_barter', methods=['GET', 'POST'])
 def create_barter():
     user_id = session.get('user_id')
@@ -147,6 +159,7 @@ def create_barter():
         flash('User not found', 'error')
         return redirect(url_for('signin'))
 
+    # Get form data
     if request.method == 'POST':
         title = request.form.get('title')
         skill_offered = request.form.get('skill_offered')
@@ -157,6 +170,7 @@ def create_barter():
             flash('Title, offered skill, and requested skill cannot be empty', 'error')
             return redirect(url_for('create_barter'))
 
+        # Create new barter instance
         barter = Barter(
             title=title,
             skill_offered=skill_offered,
@@ -173,6 +187,7 @@ def create_barter():
 
     return render_template('create_barter.html', user=user, user_id=user_id)
 
+# Barter details route
 @app.route('/barter_details/<int:barter_id>', methods=['GET', 'POST'])
 def barter_details(barter_id):
     user_id = session.get('user_id')
@@ -218,6 +233,7 @@ def barter_details(barter_id):
 
     return render_template('barter_details.html', barter=barter, user_id=user_id)
 
+# Requests page route
 @app.route('/requests')
 def requests():
     user_id = session.get('user_id')
@@ -242,6 +258,7 @@ def requests():
 
     return render_template('requests.html', user=user, user_id=user_id, my_barters=my_barters, requested_barters=requested_barters, ongoing_barters=ongoing_barters)
 
+# Logout route
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
