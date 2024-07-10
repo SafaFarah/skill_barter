@@ -3,31 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page -->
     <title>SkillBarter - Welcome</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../static/styles/style.css">
 </head>
 <body>
     <header>
+        <!-- Logo image for SkillBarter -->
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
     </header>
     <main>
+        <!-- Slider section for welcome images -->
         <section class="slider">
             <div class="slides">
+                <!-- Welcome images in the slider -->
                 <img src="../static/images/welcome1.png" alt="welcome">
                 <img src="../static/images/welcome2.png" alt="Skill Exchange">
                 <img src="../static/images/welcome3.png" alt="How start">
                 <img src="../static/images/welcome4.png" alt="Requests">
             </div>
+            <!-- Navigation buttons for the slider -->
             <button class="prev" onclick="prevSlide()">&#10094;</button>
             <button class="next" onclick="nextSlide()">&#10095;</button>
         </section>
+        <!-- Signup section with a button linking to the signup page -->
         <section class="signup">
             <a href="{{ url_for('signup') }}" class="btn">Start Now</a>
         </section>
     </main>
     <footer>
+        <!-- Footer with copyright information -->
         <p>&copy; 2024 SkillBarter. All rights reserved.</p>
     </footer>
+    <!-- Link to external JavaScript file -->
     <script src="../static/js/script.js"></script>
 </body>
 </html>
