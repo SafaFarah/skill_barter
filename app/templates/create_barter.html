@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Barter</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../static/styles/style7.css">
 </head>
 <body>
     <header>
+        <!-- Logo image for SkillBarter -->
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <!-- Navigation menu -->
         <nav>
             <ul>
+                <!-- Navigation links -->
                 <li><a href="{{ url_for('main') }}">Home</a></li>
                 <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
@@ -22,10 +26,12 @@
     <main>
         <div class="container">
             <h1>Create New Barter</h1>
+            !-- Form to create a new barter -->
             <form action="{{ url_for('create_barter') }}" method="post">
                 <label for="title">Barter Title:</label>
                 <input type="text" id="title" name="title" required>
 
+                <!-- Skill offered dropdown -->
                 <label for="skill_offered">Skill Offered:</label>
                 <select id="skill_offered" name="skill_offered" required>
                     <option value="" disabled selected>Select your skill</option>
@@ -37,7 +43,8 @@
                     <option value="Machine Learning">Machine Learning</option>
                     <!-- Add more options as needed -->
                 </select>
-
+                
+                <!-- Skill requested dropdown -->
                 <label for="skill_requested">Requested Skill:</label>
                 <select id="skill_requested" name="skill_requested" required>
                     <option value="" disabled selected>Select desired skill</option>
@@ -53,6 +60,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" rows="4" required></textarea>
 
+                <!-- Submit button -->
                 <input type="submit" value="Create Barter">
             </form>
         </div>
