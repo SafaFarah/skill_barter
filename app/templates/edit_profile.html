@@ -48,7 +48,7 @@
                         <div id="skills_i_have_container">
                             {% for skill in user_skills_i_have %}
                                 <div class="skill-item">
-                                    {{ skill }}
+                                    <span class="skill-text">{{ skill }}</span>
                                     <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_have', '{{ skill }}')">Remove</button>
                                 </div>
                             {% endfor %}
@@ -77,7 +77,7 @@
                         <div id="skills_i_want_container">
                             {% for skill in user_skills_i_want %}
                                 <div class="skill-item">
-                                    {{ skill }}
+                                    <span class="skill-text">{{ skill }}</span>
                                     <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_want', '{{ skill }}')">Remove</button>
                                 </div>
                             {% endfor %}
@@ -112,3 +112,4 @@
     <script src="../static/js/script1.js"></script>
 </body>
 </html>
+
