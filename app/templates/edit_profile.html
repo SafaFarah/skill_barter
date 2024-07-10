@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page, dynamically set to include the user's username -->
     <title>Edit Profile - {{ user.username }}</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../static/styles/style6.css">
 </head>
 <body>
     <header>
+        <!-- Logo image for SkillBarter -->
         <img src="../static/images/logo.png" alt="SkillBarter Logo" class="logo">
+        <!-- Navigation menu -->
         <nav>
             <ul>
+                <!-- Navigation menu -->
                 <li><a href="{{ url_for('main') }}">Home</a></li>
                 <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
                 <li><a href="{{ url_for('barter') }}">Barters</a></li>
@@ -21,9 +26,12 @@
         </nav>
     </header>
     <main>
+        <!-- Section for the edit profile form -->
         <section class="edit-profile-form">
             <div class="container">
+                <!-- Form title -->
                 <h1>Edit Your Profile</h1>
+                <!-- Form to edit user profile details -->
                 <form action="{{ url_for('edit_profile') }}" method="post">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" value="{{ user.username }}" required>
@@ -43,16 +51,19 @@
                     <label for="age">Age:</label>
                     <input type="number" id="age" name="age" value="{{ user.age }}" required>                
 
+                    <!-- Skills I Have section -->
                     <div class="skill-section">
                         <label for="skills_i_have">Skills I Have:</label>
                         <div id="skills_i_have_container">
                             {% for skill in user_skills_i_have %}
+                                <!-- Display each skill with a remove button -->
                                 <div class="skill-item">
                                     <span class="skill-text">{{ skill }}</span>
                                     <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_have', '{{ skill }}')">Remove</button>
                                 </div>
                             {% endfor %}
                         </div>
+                        <!-- Dropdown to select skills the user has -->
                         <select id="skills_i_have" class="skill-select" onchange="addSelectedSkill('skills_i_have')">
                             <option disabled selected>-- Select a skill --</option>
                             <option value="Python">Python</option>
@@ -63,25 +74,31 @@
                             <option value="CSS">CSS</option>
                             <option value="Data Analysis">Data Analysis</option>
                             <option value="Machine Learning">Machine Learning</option>
+                            <!-- Add additional skills from the skills list -->
                             {% for skill in skills %}
                                 {% if skill not in ['Python', 'C', 'C++', 'JavaScript', 'HTML', 'CSS', 'Data Analysis', 'Machine Learning'] %}
                                     <option value="{{ skill }}">{{ skill }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
+                        <!-- Hidden input to store selected skills -->
                         <input type="hidden" id="skills_i_have_hidden" name="skills_i_have" value="{{ user.skills_i_have }}">
                     </div>
 
+                    <!-- Skills I Want section -->
                     <div class="skill-section">
                         <label for="skills_i_want">Skills I Want:</label>
                         <div id="skills_i_want_container">
                             {% for skill in user_skills_i_want %}
+                                <!-- Display each skill with a remove button -->
                                 <div class="skill-item">
                                     <span class="skill-text">{{ skill }}</span>
                                     <button type="button" class="remove-skill-button" onclick="removeSkill('skills_i_want', '{{ skill }}')">Remove</button>
                                 </div>
                             {% endfor %}
                         </div>
+
+                        <!-- Dropdown to select skills the user wants -->
                         <select id="skills_i_want" class="skill-select" onchange="addSelectedSkill('skills_i_want')">
                             <option disabled selected>-- Select a skill --</option>
                             <option value="Python">Python</option>
@@ -92,23 +109,28 @@
                             <option value="CSS">CSS</option>
                             <option value="Data Analysis">Data Analysis</option>
                             <option value="Machine Learning">Machine Learning</option>
+                            <!-- Add additional skills from the skills list -->
                             {% for skill in skills %}
                                 {% if skill not in ['Python', 'C', 'C++', 'JavaScript', 'HTML', 'CSS', 'Data Analysis', 'Machine Learning'] %}
                                     <option value="{{ skill }}">{{ skill }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
+                        <!-- Hidden input to store selected skills -->
                         <input type="hidden" id="skills_i_want_hidden" name="skills_i_want" value="{{ user.skills_i_want }}">
                     </div>
 
+                    <!-- Discord username input -->
                     <label for="discord_username">Discord Username:</label>
                     <input type="text" id="discord_username" name="discord_username" value="{{ user.discord_username }}">
 
+                    <!-- Submit button to save changes -->
                     <button type="submit" class="submit-button">Save Changes</button>
                 </form>
             </div>
         </section>
     </main>
+    <!-- Link to external JavaScript file -->
     <script src="../static/js/script1.js"></script>
 </body>
 </html>
